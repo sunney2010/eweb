@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunney.eweb.mapper.PermissionsMapper">
+	<insert id="savePermissions" parameterType="com.sunney.eweb.model.PermissionsDTO">
+		insert into
+		t_permissions(permissionId,permissionName,parentId,url,sort,type,createTime,createOperator,modifiedOperator,modifiedTime,remark)
+		values(#{permissionId},#{permissionName},#{parentId},#{url},#{sort},#{type},now(),#{remark},#{createOperator},#{createOperator},now(),#{remark})
+	</insert>
+	<select id="queryPermissionsList" resultType="com.sunney.eweb.model.PermissionsDTO">
+		select permissionId,permissionName,parentId,url,sort,type,createTime,createOperator,modifiedOperator,modifiedTime,remark
+		from t_permissions
+	</select>
+	<select id="queryPermissionsListByRoleId" resultType="com.sunney.eweb.model.PermissionsDTO" parameterType="long">
+		select p.permissionId,permissionName,parentId,url,sort,type,createTime,createOperator,modifiedOperator,modifiedTime,remark
+		from t_permissions p left join  t_role_permission rp on rp.permissionId=p.permissionId
+		<where>
+		   rp.roleId=#{roleId}
+		</where>
+	</select>
+</mapper>

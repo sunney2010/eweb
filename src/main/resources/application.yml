@@ -1,0 +1,37 @@
+app.name  : eweb
+spring.http.multipart.max-file-size : 50MB
+spring.http.multipart.max-request-size : 50MB
+spring.thymeleaf.cache : false
+
+
+logging.level.org.springframework.web: INFO
+logging.level.druid.sql  : debug
+spring.jackson.date-format : yyyy-MM-dd'T'HH:mm:ssXXX
+
+# 驱动配置信息,连接池的配置信息  
+mySQLDataSource:
+    type : com.alibaba.druid.pool.DruidDataSource
+    dbUrl : jdbc:mysql://127.0.0.1:3306/demo?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    userName : root
+    password : sunney
+    driverClassName : com.mysql.jdbc.Driver
+    initialSize : 5
+    minIdle : 5
+    maxActive : 20
+    maxWait : 60000
+    timeBetweenEvictionRunsMillis : 60000
+    minEvictableIdleTimeMillis : 300000
+    validationQuery : SELECT 1 FROM DUAL
+    testWhileIdle : true
+    testOnBorrow : false
+    testOnReturn : false
+    poolPreparedStatements : true
+    maxPoolPreparedStatementPerConnectionSize : 20
+    filters : stat,wall,log4j
+    connectionProperties : druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+myBatis:
+  mapperLocations: classpath*:/config/mybatis/*.xml
+  typeAliasesPackage: com.sunney.eweb.model 
+  configLocation: classpath:/mybatis-config.xml
+

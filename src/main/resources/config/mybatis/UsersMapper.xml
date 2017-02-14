@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunney.eweb.mapper.UsersMapper">
+	<insert id="saveUsers" parameterType="com.sunney.eweb.model.UsersDTO">
+		insert into
+		t_users(userId,userName,email,mobile,password,salt,createTime,remark)
+		values(#{userId},#{userName},#{email},#{mobile},#{password},#{salt},now(),#{remark})
+	</insert>
+	<select id="queryUsersList" resultType="com.sunney.eweb.model.UsersDTO">
+		select userId,userName,email,mobile,password,salt,createTime,remark
+		from t_users
+		order by createTime desc 
+	</select>
+	<select id="queryUsersByUserId" resultType="com.sunney.eweb.model.UsersDTO">
+	   select userId,userName,email,mobile,password,salt,createTime,remark
+		from t_users
+		<where>
+		   userId=#{userId}
+		</where>
+	</select>
+	<delete id="deleteUserById" parameterType="string">
+	   delete from t_users 
+	   <where>
+		   userId=#{userId}
+		</where>
+	</delete>
+	<update id="updateUsers" parameterType="com.sunney.eweb.model.UsersDTO">
+	  update t_users 
+	  <set>
+	     <if test="userName != null">
+                userName = #{userName},
+         </if>
+         <if test="email != null">
+                email = #{email},
+         </if>
+         <if test="mobile != null">
+                mobile = #{mobile},
+         </if>
+         <if test="password != null">
+                password = #{password},
+         </if>
+         <if test="remark != null">
+                remark = #{remark},
+         </if>
+	  </set>
+	  <where>
+	    userId=#{userId}
+	  </where>
+	</update>
+</mapper>

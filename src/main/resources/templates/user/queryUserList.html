@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>H+ 后台主题UI框架 - 数据表格</title>
+    <meta name="keywords" content="后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台"/>
+    <meta name="description" content="是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术"/>
+    <link rel="shortcut icon" th:href="@{favicon.ico}"/> 
+    <link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet"/>
+    <link th:href="@{/css/plugins/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet"/>
+</head>
+<body>
+  <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <!-- Example Card View -->
+                        <div class="example-wrap">
+                            <div class="form-group"> 
+                                 <label>登录名称：</label>
+                                 <input type="text" class="input-sm"/>
+                                  <label>用户名：</label>
+                                 <input type="text" class="input-sm"/>
+                                 <button type="button" class="btn btn-primary" id="showtoast">查询</button><div class="col-sm-10">
+                                </div>
+                            </div>
+                             <div id="toolbar">
+						        <a href="/user/new" class="btn btn-primary btn-xs" >
+						           <i class="icon iconfont"></i>新增用户
+						        </a>
+						    </div>
+                            <div class="example">
+			                    <table class="table table-hover" id="cusTable"  
+							       data-pagination="true"  
+							       data-show-refresh="true"  
+							       data-show-toggle="false"  
+							       data-show-columns="false">  
+							       <thead>  
+							          <tr>                                                           
+							              <th data-field="userId" data-sortable="true"  >登录名称 
+							              </th>  
+							              <th data-field="userName" >用户名称
+							              </th>  
+							              <th  data-field="email">邮箱
+							              </th>  
+							              <th data-field="mobile" >手机
+							              </th>  
+							              <th  data-field="createTime" >创建时间
+							              </th>  
+							              <th data-field="remark" >备注
+							              </th>  
+							              <!-- 在此省略表格列的代码，代码和上面差不多 -->  
+							              <th class="col-xs-2" 
+							                   data-field="action" 
+							                   data-formatter="actionFormatter" 
+							                   data-events="actionEvents">操作
+							              </th>     
+							          </tr>  
+							       </thead>  
+							       <tbody>  
+							       </tbody>  
+							</table>  
+                            </div>
+                        </div>
+                        <!-- End Example Card View -->
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+    <script th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+	<script th:src="@{/js/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
+	<script th:src="@{/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
+	<script th:src="@{/js/plugins/layer/layer.min.js}"></script>
+	<script th:src="@{/js/module/commons/sys.js}"></script>
+	<script th:src="@{/js/module/commons/restfull.js}"></script>
+
+<script  type="text/javascript">
+	$(function () {
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+ 
+        //2.初始化Button的点击事件
+         //var oButtonInit = new ButtonInit();
+        //oButtonInit.Init();
+        //当点击查询按钮的时候执行  
+ 
+ 	});
+	var error = function() {
+		alert("error");
+		window.location.href = "/login";
+	};
+	var loginSuccess = function(data) {
+		alert("success");
+		
+	};
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function () {
+            $('#cusTable').bootstrapTable({
+                url: '/user/queryUserListAjax.html',     //请求后台的URL（*）
+                contentType: "application/x-www-form-urlencoded",
+                method: 'post',                      //请求方式（*）
+                dataType: "json",
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                pageList: [20,50,100],             //记录数可选列表
+                sortable: false,                    //是否启用排序
+                sortOrder: "desc",                   //排序方式
+                
+                //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder  
+                //设置为limit可以获取limit, offset, search, sort, order  
+                queryParamsType : "undefined",   
+                queryParams: function queryParams(params) {   //设置查询参数  
+                var param = {    
+                      pageNumber: params.pageNumber,    
+                      pageSize: params.pageSize,  
+                  };    
+                 return param;                   
+                },  
+                onLoadSuccess: function(){  //加载成功时执行  
+                    //layer.msg("加载成功");  
+                 },  
+                onLoadError: function(){  //加载失败时执行  
+                    layer.msg("加载数据失败", {time : 1500, icon : 2});  
+                },  
+                
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 20,                       //每页的记录行数（*）
+                strictSearch: true,
+                clickToSelect: true,                //是否启用点击选中行
+                search: false,                      //是否启用查询 
+                //height: 460,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "userId",                 //每一行的唯一标识，一般为主键列
+                cardView: false,                    //是否显示详细视图
+                detailView: false                   //是否显示父子表
+              
+            });
+        };
+ 
+        return oTableInit;
+    };
+    //value: 所在collumn的当前显示值，
+    //row:整个行的数据 ，对象化，可通过.获取
+    //表格-操作 - 格式化 
+    function actionFormatter(value, row, index) {
+        return [
+         '<a class="mod" 	href="javascript:void(0);">修改</a> ',
+         '<a class="delete" href="javascript:void(0);" >删除</a>'
+        ].join('');  
+    }
+    //表格  - 操作 - 事件
+    window.actionEvents = {
+        'click .mod': function (e, value, row, index) {    
+              //修改操作
+        	 window.location.href = "/user/edit/"+row.userId;
+         },
+        'click .delete': function (e, value, row, index) {
+        	restfull.asynRestDelete('/user/delete/'+row.userId);
+         }
+     }
+    function dateFormatter (value, row, index){
+    	var myDate = new Date();
+	   // var date = eval('new ' + eval(value).source);
+	    return myDate.format("yyyy-MM-dd hh:mm:ss");
+    }
+ </script>
+</body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>
