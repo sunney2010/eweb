@@ -7,8 +7,8 @@ package com.sunney.eweb.service;
 
 import java.util.List;
 
-import com.sunney.eweb.commons.UserQuery;
 import com.sunney.eweb.model.UsersDTO;
+import com.sunney.eweb.query.UserQuery;
 
 /**
  * 类UsersService.java的实现描述：TODO 类实现描述

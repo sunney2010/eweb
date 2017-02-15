@@ -5,9 +5,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>H+ 后台主题UI框架 - 数据表格</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台"/>
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术"/>
-
+    <meta name="keywords" content="后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台"/>
+    <meta name="description" content="是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术"/>
     <link rel="shortcut icon" th:href="@{favicon.ico}"/> 
     <link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet"/>
     <link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet"/>
@@ -15,11 +14,10 @@
     <link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet"/>
 </head>
-
 <body>
   <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>角色管理</h5>
+                <h5>权限管理</h5>
             </div>
             <div class="ibox-content">
                 <div class="row row-lg">
@@ -27,14 +25,16 @@
                         <!-- Example Card View -->
                         <div class="example-wrap">
                             <div class="form-group"> 
-                                 <label>角色名称：</label>
+                                 <label>登录名称：</label>
+                                 <input type="text" class="input-sm"/>
+                                  <label>用户名：</label>
                                  <input type="text" class="input-sm"/>
                                  <button type="button" class="btn btn-primary" id="showtoast">查询</button><div class="col-sm-10">
                                 </div>
                             </div>
                              <div id="toolbar">
-						        <a href="/role/new" class="btn btn-primary btn-xs" >
-						           <i class="icon iconfont"></i>新增角色
+						        <a href="/user/new" class="btn btn-primary btn-xs" >
+						           <i class="icon iconfont"></i>新增用户
 						        </a>
 						    </div>
                             <div class="example">
@@ -45,9 +45,13 @@
 							       data-show-columns="false">  
 							       <thead>  
 							          <tr>                                                           
-							              <th data-field="roleId" data-sortable="true"  >角色编号
+							              <th data-field="userId" data-sortable="true"  >登录名称 
 							              </th>  
-							              <th data-field="roleName" >角色名称
+							              <th data-field="userName" >用户名称
+							              </th>  
+							              <th  data-field="email">邮箱
+							              </th>  
+							              <th data-field="mobile" >手机
 							              </th>  
 							              <th  data-field="createTime" >创建时间
 							              </th>  
@@ -105,7 +109,7 @@
         //初始化Table
         oTableInit.Init = function () {
             $('#cusTable').bootstrapTable({
-                url: '/role/queryRoleListAjax.html',     //请求后台的URL（*）
+                url: '/user/queryUserListAjax.html',     //请求后台的URL（*）
                 contentType: "application/x-www-form-urlencoded",
                 method: 'post',                      //请求方式（*）
                 dataType: "json",
@@ -141,7 +145,7 @@
                 clickToSelect: true,                //是否启用点击选中行
                 search: false,                      //是否启用查询 
                 //height: 460,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-                uniqueId: "roleId",                 //每一行的唯一标识，一般为主键列
+                uniqueId: "userId",                 //每一行的唯一标识，一般为主键列
                 cardView: false,                    //是否显示详细视图
                 detailView: false                   //是否显示父子表
               
@@ -163,10 +167,10 @@
     window.actionEvents = {
         'click .mod': function (e, value, row, index) {    
               //修改操作
-        	 window.location.href = "/role/edit/"+row.roleId;
+        	 window.location.href = "/user/edit/"+row.userId;
          },
         'click .delete': function (e, value, row, index) {
-        	restfull.asynRestDelete('/role/delete/'+row.roleId);
+        	restfull.asynRestDelete('/user/delete/'+row.userId);
          }
      }
     function dateFormatter (value, row, index){

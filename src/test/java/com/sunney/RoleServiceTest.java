@@ -19,9 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
 import com.sunney.eweb.EwebApplication;
-import com.sunney.eweb.model.UsersDTO;
-import com.sunney.eweb.query.UserQuery;
-import com.sunney.eweb.service.UsersService;
+import com.sunney.eweb.model.RoleDTO;
+import com.sunney.eweb.query.RoleQuery;
+import com.sunney.eweb.service.RoleService;
 
 /**
  * 类UsersServiceTest.java的实现描述：TODO 类实现描述
@@ -31,28 +31,20 @@ import com.sunney.eweb.service.UsersService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @AutoConfigureAfter({ EwebApplication.class })
 @SpringBootTest(classes = EwebApplication.class)
-public class UsersServiceTest {
+public class RoleServiceTest {
 
-    protected Logger     logger = LoggerFactory.getLogger(this.getClass());
+    protected Logger    logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private UsersService usersService;
+    private RoleService roleService;
 
     @Test
     @Rollback(true)
-    public void saveUsersTest() {
+    public void saveRoleTest() {
         logger.info("=======================start");
-        for (int i = 1; i < 100; i++) {
-            UsersDTO user = new UsersDTO();
-            user.setUserId("555_"+i);
-            user.setUserName("sunney_"+i);
-            user.setPassword("55555555555555555");
-            user.setSalt("555555555555555");
-            user.setEmail("4444444444");
-            user.setRemark("44444444444444");
-            user.setMobile("15989569150");
-            usersService.saveUsers(user);
-            logger.info("=======================end");
-        }
+        RoleDTO role = new RoleDTO();
+        role.setRoleName("test");
+        roleService.saveRole(role);
+        logger.info("=======================end");
 
     }
 
@@ -60,20 +52,21 @@ public class UsersServiceTest {
     @Rollback(true)
     public void queryUsersListTest() {
         logger.info("=======================start");
-        UserQuery userQuery = new UserQuery();
-        userQuery.setPageSize(3);
-        List<UsersDTO> userList = usersService.queryUsersList(userQuery);
-        logger.info("=======================size:" + userList.size());
-        logger.info("=======================userList:" + JSON.toJSONString(userList));
+        RoleQuery roleQuery = new RoleQuery();
+        roleQuery.setPageSize(3);
+        List<RoleDTO> roleList = roleService.queryRoleList(roleQuery);
+        logger.info("=======================size:" + roleList.size());
+        logger.info("=======================userList:" + JSON.toJSONString(roleList));
         logger.info("=======================end");
 
     }
+
     @Test
     @Rollback(true)
     public void deleteTest() {
         logger.info("=======================start");
-       
-        usersService.deleteUserById("555");
+
+        roleService.deleteRoleById(2L);
         logger.info("=======================end");
 
     }

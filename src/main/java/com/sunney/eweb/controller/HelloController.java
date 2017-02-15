@@ -20,11 +20,10 @@ public class HelloController {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value="/test")
-    public String test() {
-        logger.info("====================test");
-        return "test";
+    @RequestMapping(value = "/main")
+    public String main() {
+        logger.info("====================main");
+        return "main";
     }
-   
 
 }

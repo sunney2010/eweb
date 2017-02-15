@@ -10,9 +10,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sunney.eweb.commons.UserQuery;
 import com.sunney.eweb.mapper.UsersMapper;
 import com.sunney.eweb.model.UsersDTO;
+import com.sunney.eweb.query.UserQuery;
 import com.sunney.eweb.service.UsersService;
 
 /**

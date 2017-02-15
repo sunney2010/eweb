@@ -11,8 +11,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.sunney.eweb.commons.UserQuery;
 import com.sunney.eweb.model.UsersDTO;
+import com.sunney.eweb.query.UserQuery;
 
 /**
  * 类UsersMapper.java的实现描述：TODO 类实现描述 
@@ -20,12 +20,13 @@ import com.sunney.eweb.model.UsersDTO;
  */
 @Component("usersMapper") 
 public interface  UsersMapper {
+
     public void saveUsers(UsersDTO user);
-    
+
     public List<UsersDTO> queryUsersList(UserQuery userQuery);
-    
+
     public UsersDTO queryUsersByUserId(String userId);
-    
+
     public int deleteUserById(String userId);
 
     public int updateUsers(UsersDTO user);

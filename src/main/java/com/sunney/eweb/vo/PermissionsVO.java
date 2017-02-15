@@ -18,28 +18,28 @@ public class PermissionsVO implements Serializable {
     /**
      * 
      */
-    private static final long serialVersionUID = 9161029620385156690L;
-    
-    private Integer              permissionId;
-    private String               permissionName;
-    private Integer              parentId;
-    private String               url;
-    private Integer              sort;
-    private String               type;
-    
+    private static final long   serialVersionUID = 9161029620385156690L;
+
+    private Long                permissionId;
+    private String              permissionName;
+    private Long             parentId;
+    private String              url;
+    private Integer             sort;
+    private String              type;
+
     private List<PermissionsVO> subPermissionsVOList;
 
     /**
      * @return the permissionId
      */
-    public Integer getPermissionId() {
+    public Long getPermissionId() {
         return permissionId;
     }
 
     /**
      * @param permissionId the permissionId to set
      */
-    public void setPermissionId(Integer permissionId) {
+    public void setPermissionId(Long permissionId) {
         this.permissionId = permissionId;
     }
 
@@ -60,14 +60,14 @@ public class PermissionsVO implements Serializable {
     /**
      * @return the parentId
      */
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
     /**
      * @param parentId the parentId to set
      */
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

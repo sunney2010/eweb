@@ -5,17 +5,21 @@
  * use it only in accordance with the terms of the license agreement you entered
  * into with Colotnet.com.
  */
-package com.sunney.eweb.commons;
+package com.sunney.eweb.query;
+
+import com.sunney.eweb.commons.PageQuery;
 
 /**
  * 类UserQuery.java的实现描述：TODO 类实现描述 
  * @author Sunney 2016年12月8日 下午2:25:11
  */
-public class UserQuery extends PageQuery{
+public class PermissonsQuery extends PageQuery{
 
     /**
      * 
      */
-    private static final long serialVersionUID = -3218354279427403430L;
+    private static final long serialVersionUID = -6913573109636001761L;
+
+   
 
 }

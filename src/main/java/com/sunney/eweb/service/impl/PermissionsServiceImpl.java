@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.sunney.eweb.mapper.PermissionsMapper;
 import com.sunney.eweb.model.PermissionsDTO;
+import com.sunney.eweb.query.PermissonsQuery;
 import com.sunney.eweb.service.PermissionsService;
 
 /**
@@ -25,51 +26,36 @@ public class PermissionsServiceImpl implements PermissionsService {
     @Autowired
     private PermissionsMapper permissionsMapper;
 
-    /*
-     * (non-Javadoc)
-     * @see com.sunney.eweb.service.PermissionsService#savePermissions(com.sunney.eweb.model.PermissionsDTO)
-     */
     @Override
     public void savePermissions(PermissionsDTO permission) {
         permissionsMapper.savePermissions(permission);
 
     }
 
-    /*
-     * (non-Javadoc)
-     * @see com.sunney.eweb.service.PermissionsService#queryPermissionsList()
-     */
     @Override
-    public List<PermissionsDTO> queryPermissionsList() {
-        return permissionsMapper.queryPermissionsList();
+    public List<PermissionsDTO> queryPermissionsList(PermissonsQuery query) {
+        return permissionsMapper.queryPermissionsList(query);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see com.sunney.eweb.service.PermissionsService#queryPermissionsId(java.lang.Integer)
-     */
     @Override
-    public PermissionsDTO queryPermissionsId(Integer permissionId) {
-        // TODO Auto-generated method stub
+    public PermissionsDTO queryPermissionsId(Long permissionId) {
         return permissionsMapper.queryPermissionsId(permissionId);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see com.sunney.eweb.service.PermissionsService#updatePermissions(com.sunney.eweb.model.PermissionsDTO)
-     */
     @Override
     public void updatePermissions(PermissionsDTO permission) {
         permissionsMapper.updatePermissions(permission);
 
     }
 
-    /* (non-Javadoc)
-     * @see com.sunney.eweb.service.PermissionsService#queryPermissionsListByRoleId(java.lang.Long)
-     */
     @Override
     public List<PermissionsDTO> queryPermissionsListByRoleId(Long roleId) {
         return permissionsMapper.queryPermissionsListByRoleId(roleId);
+    }
+
+    @Override
+    public int deletePermissionsById(Long permissionId) {
+        return permissionsMapper.deletePermissionsById(permissionId);
     }
 
 }

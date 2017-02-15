@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunney.eweb.mapper.RoleMapper">
+	<insert id="saveRole" parameterType="com.sunney.eweb.model.RoleDTO">
+		insert into
+		t_roles(roleId,roleName,createTime,modifiedTime,remark)
+		values(#{roleId},#{roleName},now(),now(),#{remark})
+	</insert>
+	<select id="queryRoleList" resultType="com.sunney.eweb.model.RoleDTO">
+		select roleId,roleName,createTime,modifiedTime,remark
+		from t_roles
+		order by createTime desc 
+	</select>
+	<select id="queryRoleById" resultType="com.sunney.eweb.model.RoleDTO">
+	   select roleId,roleName,createTime,modifiedTime,remark
+		from t_roles
+		<where>
+		   roleId=#{roleId}
+		</where>
+	</select>
+	<delete id="deleteRoleById" parameterType="long">
+	   delete from t_roles 
+	   <where>
+		   roleId=#{roleId}
+		</where>
+	</delete>
+	<update id="updateRole" parameterType="com.sunney.eweb.model.RoleDTO">
+	  update t_roles 
+	  <set>
+	     <if test="roleName != null">
+                roleName = #{roleName},
+         </if>
+         <if test="remark != null">
+                remark = #{remark},
+         </if>
+         modifiedTime=now()
+	  </set>
+	  <where>
+	     roleId=#{roleId}
+	  </where>
+	</update>
+</mapper>

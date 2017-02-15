@@ -8,6 +8,8 @@ package com.sunney.eweb.mapper;
 import java.util.List;
 
 import com.sunney.eweb.model.PermissionsDTO;
+import com.sunney.eweb.model.RolePermissionDTO;
+import com.sunney.eweb.query.PermissonsQuery;
 
 /**
  * 类PermissionsMapper.java的实现描述：TODO 类实现描述
@@ -18,12 +20,20 @@ public interface PermissionsMapper {
 
     public void savePermissions(PermissionsDTO permission);
 
-    public List<PermissionsDTO> queryPermissionsList();
+    public List<PermissionsDTO> queryPermissionsList(PermissonsQuery query);
 
-    public PermissionsDTO queryPermissionsId(Integer permissionId);
+    public PermissionsDTO queryPermissionsId(Long permissionId);
 
     public void updatePermissions(PermissionsDTO permission);
 
     public List<PermissionsDTO> queryPermissionsListByRoleId(Long roleId);
+
+    public int deleteRolePermission(Long roleId, Long permissionId);
+
+    public void saveRolePermission(RolePermissionDTO rolePermission);
+
+    public List<RolePermissionDTO> queryRolePermissionByRoleId(Long roleId);
+    
+    public int deletePermissionsById(Long permissionId);
 
 }

@@ -23,8 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.sunney.eweb.commons.Result;
-import com.sunney.eweb.commons.UserQuery;
 import com.sunney.eweb.model.UsersDTO;
+import com.sunney.eweb.query.UserQuery;
 import com.sunney.eweb.service.UsersService;
 
 /**
